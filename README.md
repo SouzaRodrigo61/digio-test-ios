@@ -2,15 +2,7 @@
 
 ## Overview
 
-Digio is an iOS application designed to promote healthy work habits by reminding users to take breaks from prolonged sitting. The app notifies users to stand up, walk, stretch, and more, based on customizable or medically recommended intervals. The goal is to encourage regular movement, contributing to better health and well-being.
-
-## Features
-
-- **Customizable Notifications:** Users can choose the type of reminder (e.g., stand up, walk, stretch) and set the frequency for notifications.
-- **Medical Recommendations:** Predefined intervals based on medical guidelines ensure that users are prompted to take breaks at optimal times.
-- **Fixed Walking Time:** Notifications to walk are set to a medically recommended duration and cannot be changed by the user.
-- **Simple and Intuitive Interface:** The app features a clean and easy-to-understand design, making it accessible to all users.
-- **Sound Alerts:** Notifications include sound to ensure users are alerted even if they are away from their device.
+---
 
 ## Installation
 

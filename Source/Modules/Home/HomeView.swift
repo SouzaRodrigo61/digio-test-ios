@@ -121,7 +121,10 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? SpotlightsCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: spotlight)
+			cell.configure(with: spotlight) { [weak self] spotlight in
+				guard let self else { return }
+				dump(spotlight, name: "spotlight")
+			}
 			return cell
 		case .products(let product):
 			guard let cell = collectionView.dequeueReusableCell(
@@ -129,7 +132,10 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? ProductsCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: product)
+			cell.configure(with: product) { [weak self] product in
+				guard let self else { return }
+				dump(product, name: "product")
+			}
 			return cell
 		case .cash(let cash):
 			guard let cell = collectionView.dequeueReusableCell(
@@ -137,7 +143,10 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? CashCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: cash)
+			cell.configure(with: cash) { [weak self] cash in
+				guard let self else { return }
+				dump(cash, name: "cash")
+			}
 			return cell
 		}
 	}

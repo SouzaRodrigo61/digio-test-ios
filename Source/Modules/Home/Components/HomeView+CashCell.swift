@@ -13,6 +13,9 @@ extension Home.ViewController {
 	final class CashCell: UICollectionViewCell {
 		static let identifier = "CashCell"
 
+		private var cash: Home.ViewModel.Cash?
+		var onHandler: ((Home.ViewModel.Cash) -> Void)?
+
 		let imageView: UIImageView = {
 			let imageView = UIImageView()
 			imageView.contentMode = .scaleAspectFill
@@ -25,6 +28,7 @@ extension Home.ViewController {
 			super.init(frame: frame)
 			setupUI()
 			setupShadow()
+			setupGesture()
 		}
 
 		required init?(coder: NSCoder) {
@@ -50,7 +54,23 @@ extension Home.ViewController {
 			layer.masksToBounds = false
 		}
 
-		func configure(with cash: Home.ViewModel.Cash) {
+		private func setupGesture() {
+			let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+			tapGesture.numberOfTapsRequired = 1 // Define o número de toques necessários
+			addGestureRecognizer(tapGesture)
+		}
+
+		@objc private func handleTapGesture() {
+			guard let cash = cash else { return }
+			onHandler?(cash)
+		}
+
+		func configure(
+			with cash: Home.ViewModel.Cash,
+			onHandler: @escaping (Home.ViewModel.Cash) -> Void
+		) {
+			self.onHandler = onHandler
+			self.cash = cash
 			guard let url = URL(string: cash.bannerURL) else { return }
 			imageView.load(url: url)
 		}

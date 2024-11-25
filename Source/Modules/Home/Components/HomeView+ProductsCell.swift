@@ -14,6 +14,7 @@ extension Home.ViewController {
 		static let identifier = "ProductsCell"
 
 		var products: [Home.ViewModel.Product] = []
+		var onHandler: ((Home.ViewModel.Product) -> Void)?
 
 		// MARK: - UI Properties
 
@@ -60,7 +61,11 @@ extension Home.ViewController {
 
 		// MARK: - Configurate
 
-		func configure(with products: [Home.ViewModel.Product]) {
+		func configure(
+			with products: [Home.ViewModel.Product],
+			onHandler: @escaping (Home.ViewModel.Product) -> Void
+		) {
+			self.onHandler = onHandler
 			self.products = products
 
 			DispatchQueue.main.async {
@@ -85,6 +90,11 @@ extension Home.ViewController.ProductsCell: UICollectionViewDelegate, UICollecti
 		}
 		cell.configure(with: product.imageURL)
 		return cell
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let product = products[indexPath.row]
+		onHandler?(product)
 	}
 }
 
@@ -172,7 +182,6 @@ extension Home.ViewController.ProductsCell {
 
 			imageView.snp.makeConstraints { make in
 				make.centerX.centerY.equalToSuperview()
-
 				make.width.height.equalTo(60)
 			}
 		}

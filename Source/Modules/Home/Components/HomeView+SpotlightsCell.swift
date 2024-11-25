@@ -16,6 +16,8 @@ extension Home.ViewController {
 
 		var spotlights: [Home.ViewModel.Spotlight] = []
 
+		var onHandler: ((Home.ViewModel.Spotlight) -> Void)?
+
 		// MARK: - UI Properties
 
 		private lazy var collectionView: UICollectionView = {
@@ -61,7 +63,11 @@ extension Home.ViewController {
 
 		// MARK: - Configurate
 
-		func configure(with spotlights: [Home.ViewModel.Spotlight]) {
+		func configure(
+			with spotlights: [Home.ViewModel.Spotlight],
+			onHandler: @escaping (Home.ViewModel.Spotlight) -> Void
+		) {
+			self.onHandler = onHandler
 			self.spotlights = spotlights
 
 			DispatchQueue.main.async {
@@ -86,6 +92,11 @@ extension Home.ViewController.SpotlightsCell: UICollectionViewDelegate, UICollec
 		}
 		cell.configure(with: spotlight.bannerURL)
 		return cell
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let spotlight = spotlights[indexPath.row]
+		onHandler?(spotlight)
 	}
 }
 
