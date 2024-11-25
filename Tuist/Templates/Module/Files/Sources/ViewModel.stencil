@@ -1,0 +1,12 @@
+//
+//  {{ name }}Controller.swift
+//  iOS Digio
+//
+//  Created by {{ author }} on {{ date }}.
+//
+
+import UIKit
+
+extension {{ name }} {
+    class ViewModel: Identifiable { }
+}

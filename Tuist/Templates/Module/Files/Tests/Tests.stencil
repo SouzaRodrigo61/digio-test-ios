@@ -1,0 +1,16 @@
+//
+//  {{ name }}ViewController.swift
+//  iOS Digio
+//
+//  Created by {{ author }} on {{ date }}.
+//
+
+import XCTest
+@testable import Digio
+
+final class {{ name }}Tests: XCTestCase {
+
+    func testExample() {
+        XCTAssertEqual(1, 1)
+    }
+}

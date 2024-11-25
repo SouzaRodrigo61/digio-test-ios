@@ -1,0 +1,19 @@
+//
+//  {{ name }}.swift
+//  iOS Digio
+//
+//  Created by {{ author }} on {{ date }}.
+//
+
+import UIKit
+
+enum {{ name }} { 
+
+    static func builder() -> UIViewController {
+        let viewModel = ViewModel()
+        let viewController = ViewController(model: viewModel)
+
+        return viewController
+    }
+
+}

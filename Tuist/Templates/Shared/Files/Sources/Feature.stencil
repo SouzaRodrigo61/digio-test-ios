@@ -1,0 +1,8 @@
+//
+//  {{ name }}.swift
+//  iOS Digio
+//
+//  Created by {{ author }} on {{ date }}.
+//
+
+enum {{ name }} { }

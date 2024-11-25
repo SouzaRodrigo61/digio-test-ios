@@ -1,0 +1,200 @@
+{
+  "sourceLanguage" : "pt-BR",
+  "strings" : {
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "login.buble.app.name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acamps 2024"
+          }
+        }
+      }
+    },
+    "login.buble.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei você,"
+          }
+        }
+      }
+    },
+    "login.camping.section.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informações"
+          }
+        }
+      }
+    },
+    "login.google.button.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Google"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sessão com o Google"
+          }
+        }
+      }
+    },
+    "login.label.service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By clicking \\\"Continue\\\", you accept the app's terms of use and privacy policies."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao clicar em \\\"Continuar\\\", você aceita os termos de uso do aplicativo e politicas de privacidade"
+          }
+        }
+      }
+    },
+    "login.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy to manager camping"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facilidade na gestão de acampamentos"
+          }
+        }
+      }
+    },
+    "login.title" : {
+      "comment" : "\"Meet Acamps\" is the first title of screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meet Acamps"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conheça Acamps"
+          }
+        }
+      }
+    },
+    "onboarding.camps.code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esse vai ser o código de identificação do acampamento."
+          }
+        }
+      }
+    },
+    "onboarding.camps.code.input.placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Camping identification"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código acampamento"
+          }
+        }
+      }
+    },
+    "onboarding.camps.code.label.info.1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agora vamos continuar com o nome do acampamento"
+          }
+        }
+      }
+    },
+    "onboarding.camps.code.label.info.2" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O codigo não pode ser maior de 10 caracteres"
+          }
+        }
+      }
+    },
+    "onboarding.camps.code.label.info.3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Com esse código poderá, enviar a outros membros"
+          }
+        }
+      }
+    },
+    "onboarding.camps.code.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Acamps"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acampamento"
+          }
+        }
+      }
+    },
+    "onboarding.initial.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vamos da inicio ao seu primeiro passo na construção do seu acampamento"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

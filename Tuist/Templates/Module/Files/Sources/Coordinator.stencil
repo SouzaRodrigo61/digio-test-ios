@@ -1,0 +1,19 @@
+//
+//  {{ name }}.swift
+//  iOS Digio
+//
+//  Created by {{ author }} on {{ date }}.
+//
+
+import UIKit
+
+extension Coordinating where A == UINavigationController {
+
+    static func coordinator{{ name }}(viewControllerProvider: @escaping () -> UIViewController) -> Self {
+        return Self { navigationController in
+            let viewController = {{ name }}.builder()
+            navigationController.pushViewController(viewController, animated: false)
+        }
+    }
+
+}
