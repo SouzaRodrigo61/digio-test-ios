@@ -1,116 +1,152 @@
-# Digio - iOS Application
+# Digio - iOS Application  
 
-## Overview
+## Visão Geral  
+
+O objetivo deste projeto é utilizar um template fornecido para desenvolver um aplicativo com duas telas:  
+1. Uma tela que exibe uma lista de produtos da **Digio Store**.  
+2. Uma tela que apresenta os detalhes de um produto.
+
+| Tela         | Descrição                                                                                                     | Imagem                     |
+|--------------|-------------------------------------------------------------------------------------------------------------|----------------------------|
+| **Home**     | Tela inicial que exibe a lista de produtos disponíveis na **Digio Store**.                                   | ![Home](assets/home.png)   |
+| **Detalhes** | Tela de detalhes que apresenta informações detalhadas sobre o produto selecionado. Layout de design livre.  | ![Detail](assets/detail.png) |
+
+
+Segue uma seção detalhada para incluir no README sobre a arquitetura do projeto:
 
 ---
 
-## Installation
+## Arquitetura  
 
-### Prerequisites
+O projeto utiliza uma arquitetura baseada no padrão **MVVM-C** (Model-View-ViewModel-Coordinator), incorporando conceitos modernos de programação funcional inspirados pelo **Point-Free Style**.  
 
-- **macOS** with the latest version of **Xcode** installed.
-- **Tuist** installed. If not installed, you can install it using the following command:
+### Principais Abordagens  
 
-   ```bash
-   brew tap tuist/tuist
-   brew install tuist
-   ```
+1. **Protocol Witnesses**  
+   - Utilizei o conceito de [Protocol Witnesses](https://www.pointfree.co/collections/protocol-witnesses) para desacoplar comportamentos e facilitar a composição de dependências e funcionalidades.  
+   - Essa abordagem permite modelar comportamentos em vez de aderir a uma hierarquia rígida de protocolos, trazendo maior flexibilidade ao código.  
 
-### Setup
+2. **Callback Closures**  
+   - Substituí o uso de delegados tradicionais por **callback closures**, simplificando a comunicação entre componentes e reduzindo boilerplate.  
+   - Isso resultou em um fluxo mais direto e funcional, favorecendo a legibilidade e manutenção do código.  
 
-1. **Get Packages:**
+3. **Gerenciamento de Dependências**  
+   - Adotei um padrão próximo ao [PointFree Dependencies](https://github.com/pointfreeco/swift-dependencies), permitindo injeção explícita de dependências em vez de usar singletons globais.  
+   - Isso facilita o teste de unidades isoladas e promove maior controle sobre as dependências do aplicativo.  
 
-   ```bash
-   tuist install
-   ```
+---
 
-2. **Generate the Xcode Project:**
+### Estrutura MVVM-C  
 
-   Use Tuist to generate the Xcode project files:
+A arquitetura foi organizada seguindo as responsabilidades principais de cada camada:  
 
-   ```bash
-   tuist generate
-   ```
+| Camada       | Responsabilidade                                                                                           |
+|--------------|-----------------------------------------------------------------------------------------------------------|
+| **Model**    | Representa os dados e a lógica de negócios. Os modelos são responsáveis por processar e validar informações. |
+| **View**     | Componentes de interface do usuário que exibem os dados do ViewModel e encaminham as ações do usuário.     |
+| **ViewModel**| Gerencia o estado da View, transforma os dados do Model e prepara as informações para exibição.            |
+| **Coordinator** | Gerencia o fluxo de navegação entre as telas e controla o ciclo de vida dos ViewControllers.              |
 
-   This will automatically resolve dependencies via Swift Package Manager (SPM) and set up the project.
 
-3. **Open the Project:**
+---
 
-   After generating the project, open it in Xcode:
+## Dependências  
 
-   ```bash
-   open Digio.xcodeproj
-   ```
+### SnapKit  
 
-4. **Build and Run:**
+O **SnapKit** é uma biblioteca Swift que facilita a criação de layouts utilizando código. Ele simplifica o uso de **Auto Layout** com uma API declarativa e intuitiva, eliminando a necessidade de trabalhar diretamente com NSLayoutConstraints.  
+Utilizei o SnapKit exclusivamente para controle de Auto Layout, garantindo que o layout fosse estruturado de forma eficiente e de fácil manutenção.  
 
-   Select your target device or simulator in Xcode and press `Cmd + R` to build and run the project.
+---
 
-## Project Template with Tuist
+## Instalação  
 
-This guide explains how to use templates in Tuist to organize your project by clearly separating components and modules. Follow the instructions below to set up and generate your Xcode project.
+### Pré-requisitos  
 
-1. **Shared Components:**
+- **macOS** com a versão mais recente do **Xcode** instalada.  
+- **Tuist** instalado. Caso ainda não possua, você pode instalá-lo com o seguinte comando:  
 
-- Shared components are those used across various parts of the project, such as Authentication, HealthKit, StoreKit, and similar services. To create a new shared component, run the following command, replacing `<Shared>` with the name of the component you want to create:
+   ```bash  
+   brew tap tuist/tuist  
+   brew install tuist  
+   ```  
 
-   ```bash
-   tuist scaffold Shared --name <Shared>
-   ```
+### Configuração  
 
-   Example:
+1. **Baixar Dependências**  
 
-   ```bash
-   tuist scaffold Shared --name Authentication
-   ```
+   Use o comando abaixo para instalar as dependências necessárias:  
 
-- This command will generate the basic structure needed for the shared component.
+   ```bash  
+   tuist install  
+   ```  
 
-2. **Modules:**
+2. **Gerar o Projeto Xcode**  
 
-- Modules represent specific features of your application, such as Settings, Home, and others. To create a new module, use the following command, replacing `<Module>` with the name of the desired module:
+   Gere os arquivos do projeto Xcode com o Tuist:  
 
-   ```bash
-   tuist scaffold Module --name <Module>
-   ```
+   ```bash  
+   tuist generate  
+   ```  
 
-   Example:
+   Este comando resolverá automaticamente as dependências via **Swift Package Manager (SPM)** e configurará o projeto.  
 
-   ```bash
-   tuist scaffold Module --name Home
-   ```
+3. **Abrir o Projeto**  
 
-- This command will create the basic structure for the specific feature module.
+   Após gerar o projeto, abra-o no Xcode:  
 
-3. **Generate the Xcode Project:**
+   ```bash  
+   open Digio.xcodeproj  
+   ```  
 
-- After creating the necessary components and modules, use Tuist to generate the Xcode project files:
+4. **Build e Execução**  
 
-   ```bash
-   tuist generate
-   ```
+   Selecione o dispositivo ou simulador desejado no Xcode e pressione `Cmd + R` para compilar e executar o projeto.  
 
-   This command will:
+---
 
-   - Automatically resolve dependencies via Swift Package Manager (SPM).
-   - Configure and generate the Xcode project with the defined structure.
+## Estrutura de Projeto com Tuist  
 
-- Your project will now be ready to open and edit in Xcode, with all necessary dependencies and configurations set up.
+O projeto utiliza o **Tuist** para organizar componentes e módulos, separando claramente as responsabilidades.  
 
-## Usage
+### Componentes Compartilhados  
 
-- Upon launching the app, users will be prompted to set their notification preferences, such as the type of reminders and the frequency.
-- The app will then run in the background, sending notifications with sound alerts to remind users to take action based on their preferences.
-- The user can revisit the settings at any time to adjust the notification preferences.
+- Componentes compartilhados são utilizados em diferentes partes do app, como **Autenticação**, **HealthKit** ou **StoreKit**.  
+- Para criar um novo componente compartilhado:  
 
-## Contributing
+   ```bash  
+   tuist scaffold Shared --name <Shared>  
+   ```  
 
-We welcome contributions to improve Digio. Please fork the repository and submit a pull request for any changes you would like to propose.
+   **Exemplo:**  
 
-## License
+   ```bash  
+   tuist scaffold Shared --name Authentication  
+   ```  
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+   Isso gerará a estrutura básica necessária para o componente.  
 
-## Contact
+### Módulos  
 
-If you have any questions or need further assistance, please feel free to open an issue or contact us directly.
+- Módulos representam recursos específicos do aplicativo, como **Configurações**, **Home**, etc.  
+- Para criar um novo módulo:  
+
+   ```bash  
+   tuist scaffold Module --name <Module>  
+   ```  
+
+   **Exemplo:**  
+
+   ```bash  
+   tuist scaffold Module --name Home  
+   ```  
+
+   Esse comando criará a estrutura básica para o recurso específico.  
+
+### Gerar o Projeto Xcode  
+
+- Após criar os componentes e módulos necessários, gere o projeto com:  
+
+   ```bash  
+   tuist generate  
+   ```  

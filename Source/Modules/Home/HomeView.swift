@@ -23,6 +23,31 @@ extension Home {
 			return UICollectionView(frame: .zero, collectionViewLayout: layout)
 		}()
 
+		let headerImageView: UIImageView = {
+			let imageView = UIImageView(image: .imageNotFound)
+			imageView.contentMode = .scaleAspectFit
+			imageView.layer.cornerRadius = 20
+			imageView.clipsToBounds = true
+
+			return imageView
+		}()
+
+		let headerLabel: UILabel = {
+			let label = UILabel()
+			label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+			label.textColor = .black
+			return label
+		}()
+
+		lazy var headerStack: UIStackView = {
+			let stackView = UIStackView(arrangedSubviews: [headerImageView, headerLabel])
+			stackView.axis = .horizontal
+			stackView.spacing = 8
+			stackView.alignment = .center
+
+			return stackView
+		}()
+
 		// MARK: - Init
 
 		init(viewModel: ViewModel) {
@@ -36,6 +61,12 @@ extension Home {
 
 		// MARK: - Lifecycle
 
+		override func viewWillAppear(_ animated: Bool) {
+			super.viewWillAppear(animated)
+
+			self.navigationController?.isNavigationBarHidden = true
+		}
+
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			view.backgroundColor = .white
@@ -43,28 +74,32 @@ extension Home {
 			setupDelegate()
 			setupCollectionView()
 
-			DispatchQueue.global(qos: .background).async { [weak self] in
-				guard let self else { return }
-				viewModel.fetchProducts { [weak self] result in
-					guard let self else { return }
-					switch result {
-					case .success:
-						DispatchQueue.main.async {
-							self.collectionView.reloadData()
-						}
-					case .failure(let error):
-						dump(error, name: "Error")
-					}
-				}
-			}
+			getUser()
+			getProducts()
 		}
 
 		// MARK: - Setup
 
 		private func setupUI() {
+			view.addSubview(headerStack)
 			view.addSubview(collectionView)
+
+			headerImageView.snp.makeConstraints { make in
+				make.height.width.equalTo(40)
+				make.top.equalToSuperview().offset(16)
+				make.bottom.equalToSuperview().offset(-16)
+			}
+
+			headerStack.snp.makeConstraints { make in
+				make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+				make.leading.equalToSuperview().offset(16)
+				make.trailing.equalToSuperview().offset(-16)
+			}
+
 			collectionView.snp.makeConstraints { make in
-				make.edges.equalToSuperview()
+				make.top.equalTo(headerStack.snp.bottom)
+				make.bottom.equalToSuperview()
+				make.leading.trailing.equalToSuperview()
 			}
 		}
 
@@ -87,9 +122,43 @@ extension Home {
 			)
 		}
 
-		// MARK: - Control Section
+		// MARK: - Calling viewmodel
 
-		// MARK: - Gestures
+		private func getUser() {
+			headerLabel.text = "Olá, \(viewModel.user)"
+		}
+
+		private func getProducts() {
+			DispatchQueue.global(qos: .background).async { [weak self] in
+				guard let self else { return }
+				viewModel.fetchProducts { [weak self] result in
+					guard let self else { return }
+					switch result {
+					case .success:
+						DispatchQueue.main.async {
+							self.collectionView.reloadData()
+						}
+					case .failure(let error):
+						dump(error, name: "Error")
+					}
+				}
+			}
+		}
+
+		// MARK: - Navigation
+
+		private func navigateToDetail(
+			title: String,
+			bannerURL: String,
+			description: String
+		) {
+			guard let navigationController else { return }
+			let detail = Coordinating<UINavigationController>.coordinatorDetail(
+				title: title,
+				bannerURL: bannerURL,
+				description: description)
+			detail.navigate(navigationController)
+		}
 	}
 }
 
@@ -121,9 +190,11 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? SpotlightsCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: spotlight) { [weak self] spotlight in
+			cell.configure(with: spotlight) { [weak self] value in
 				guard let self else { return }
-				dump(spotlight, name: "spotlight")
+				navigateToDetail(title: value.name,
+								 bannerURL: value.bannerURL,
+								 description: value.description)
 			}
 			return cell
 		case .products(let product):
@@ -132,9 +203,11 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? ProductsCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: product) { [weak self] product in
+			cell.configure(with: product) { [weak self] value in
 				guard let self else { return }
-				dump(product, name: "product")
+				navigateToDetail(title: value.name,
+								 bannerURL: value.imageURL,
+								 description: value.description)
 			}
 			return cell
 		case .cash(let cash):
@@ -143,9 +216,11 @@ extension Home.ViewController: UICollectionViewDataSource {
 			) as? CashCell else {
 				return UICollectionViewCell()
 			}
-			cell.configure(with: cash) { [weak self] cash in
+			cell.configure(with: cash) { [weak self] value in
 				guard let self else { return }
-				dump(cash, name: "cash")
+				navigateToDetail(title: value.title,
+								 bannerURL: value.bannerURL,
+								 description: value.description)
 			}
 			return cell
 		}
@@ -214,7 +289,7 @@ extension Home.ViewController: UICollectionViewDelegateFlowLayout {
 		_ collectionView: UICollectionView,
 		layout collectionViewLayout: UICollectionViewLayout,
 		minimumLineSpacingForSectionAt section: Int
-	) -> CGFloat { 0 }
+	) -> CGFloat { 16 }
 
 	func collectionView(
 		_ collectionView: UICollectionView,

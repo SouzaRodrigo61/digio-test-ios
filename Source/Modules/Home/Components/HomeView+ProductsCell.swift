@@ -68,9 +68,7 @@ extension Home.ViewController {
 			self.onHandler = onHandler
 			self.products = products
 
-			DispatchQueue.main.async {
-				self.collectionView.reloadData()
-			}
+			collectionView.reloadData()
 		}
 	}
 }
@@ -169,6 +167,11 @@ extension Home.ViewController.ProductsCell {
 			fatalError("init(coder:) has not been implemented")
 		}
 
+		override func prepareForReuse() {
+			imageView.image = .imageNotFound
+			imageView.accessibilityIdentifier = nil
+		}
+
 		// MARK: - Setup UI
 
 		private func setupUI() {
@@ -199,8 +202,16 @@ extension Home.ViewController.ProductsCell {
 		// MARK: - Configurate
 
 		func configure(with bannerURL: String) {
-			guard let url = URL(string: bannerURL) else { return }
+			// Limpa o estado anterior da célula
+
+			guard let url = URL(string: bannerURL) else {
+				imageView.image = .imageNotFound
+				return
+			}
+
+			// Configura a nova URL
 			imageView.load(url: url)
 		}
+
 	}
 }

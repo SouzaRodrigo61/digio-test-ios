@@ -70,9 +70,7 @@ extension Home.ViewController {
 			self.onHandler = onHandler
 			self.spotlights = spotlights
 
-			DispatchQueue.main.async {
-				self.collectionView.reloadData()
-			}
+			self.collectionView.reloadData()
 		}
 	}
 }

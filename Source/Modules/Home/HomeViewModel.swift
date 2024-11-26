@@ -17,6 +17,7 @@ extension Home {
 
 		// MARK: - UI Controlling
 
+		var user: String = "Maria"
 		var products: Products?
 		var sections: [Section] = []
 
