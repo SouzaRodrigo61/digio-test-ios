@@ -11,11 +11,6 @@ O objetivo deste projeto é utilizar um template fornecido para desenvolver um a
 | **Home**     | Tela inicial que exibe a lista de produtos disponíveis na **Digio Store**.                                   | ![Home](assets/home.png)   |
 | **Detalhes** | Tela de detalhes que apresenta informações detalhadas sobre o produto selecionado. Layout de design livre.  | ![Detail](assets/detail.png) |
 
-
-Segue uma seção detalhada para incluir no README sobre a arquitetura do projeto:
-
----
-
 ## Arquitetura  
 
 O projeto utiliza uma arquitetura baseada no padrão **MVVM-C** (Model-View-ViewModel-Coordinator), incorporando conceitos modernos de programação funcional inspirados pelo **Point-Free Style**.  
@@ -34,8 +29,6 @@ O projeto utiliza uma arquitetura baseada no padrão **MVVM-C** (Model-View-View
    - Adotei um padrão próximo ao [PointFree Dependencies](https://github.com/pointfreeco/swift-dependencies), permitindo injeção explícita de dependências em vez de usar singletons globais.  
    - Isso facilita o teste de unidades isoladas e promove maior controle sobre as dependências do aplicativo.  
 
----
-
 ### Estrutura MVVM-C  
 
 A arquitetura foi organizada seguindo as responsabilidades principais de cada camada:  
@@ -47,17 +40,12 @@ A arquitetura foi organizada seguindo as responsabilidades principais de cada ca
 | **ViewModel**| Gerencia o estado da View, transforma os dados do Model e prepara as informações para exibição.            |
 | **Coordinator** | Gerencia o fluxo de navegação entre as telas e controla o ciclo de vida dos ViewControllers.              |
 
-
----
-
 ## Dependências  
 
 ### SnapKit  
 
 O **SnapKit** é uma biblioteca Swift que facilita a criação de layouts utilizando código. Ele simplifica o uso de **Auto Layout** com uma API declarativa e intuitiva, eliminando a necessidade de trabalhar diretamente com NSLayoutConstraints.  
 Utilizei o SnapKit exclusivamente para controle de Auto Layout, garantindo que o layout fosse estruturado de forma eficiente e de fácil manutenção.  
-
----
 
 ## Instalação  
 
@@ -102,8 +90,6 @@ Utilizei o SnapKit exclusivamente para controle de Auto Layout, garantindo que o
 4. **Build e Execução**  
 
    Selecione o dispositivo ou simulador desejado no Xcode e pressione `Cmd + R` para compilar e executar o projeto.  
-
----
 
 ## Estrutura de Projeto com Tuist  
 
